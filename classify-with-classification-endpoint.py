@@ -26,20 +26,20 @@ api_url = config['API']['url']
 def classify_messages(input_csv, output_csv):
     """
     This script reads messages from a CSV file, sends them to an API for classification,
-    and appends the response to the CSV file in a new column 'label_data_science'.
+    and appends the response to the CSV file in a new column 'label_classification_api'.
     """
     # Read the CSV file
     df = pd.read_csv(input_csv)
 
-    # Ensure the 'label_data_science' column exists
-    if 'label_data_science' not in df.columns:
-        df['label_data_science'] = None
+    # Ensure the 'label_classification_api' column exists
+    if 'label_classification_api' not in df.columns:
+        df['label_classification_api'] = None
 
     # Iterate over the rows in the DataFrame
     for index, row in df.iterrows():
         # Prepare the data for the POST request
         data = {
-            "id": "ad55bce2-e1fb-4d33-8206-2abe47f9928e",
+            "id": "DUMMY",
             "message": row['message']
         }
         headers = {'Content-Type': 'application/json'}
@@ -50,8 +50,8 @@ def classify_messages(input_csv, output_csv):
         # Check if the request was successful
         if response.status_code == 200:
             response_data = response.json()
-            # Update the 'label_data_science' column with the message_type
-            df.at[index, 'label_data_science'] = response_data.get('message_type')
+            # Update the 'label_classification_api' column with the message_type
+            df.at[index, 'label_classification_api'] = response_data.get('message_type')
         else:
             print(f"Failed to classify message at index {index}: {response.text}")
 
