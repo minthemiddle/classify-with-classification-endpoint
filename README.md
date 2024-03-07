@@ -2,7 +2,7 @@
 
 Pass messages in a CSV.  
 Classify with an external classification API.  
-Saves back to CSV in label `label_classification_api`.  
+Saves back to CSV in label `classification_api`.  
 
 **Usage**  
 `pip install click pandas`  
